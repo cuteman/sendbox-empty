@@ -36,8 +36,8 @@ public class User {
 	@Column(name = "mail")
 	public String mail;
 	
-	@Column(name = "origin")
-	public int origin;
+	@Column(name = "role")
+	public String role;
 
 	public String getId() {
 		return id;
@@ -58,6 +58,14 @@ public class User {
 	}
 
 	
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String getLogin_date() {
 		return login_date;
@@ -83,18 +91,25 @@ public class User {
 		this.mail = mail;
 	}
 
-	public int getOrigin() {
-		return origin;
-	}
 
-	public void setOrigin(int origin) {
-		this.origin = origin;
-	}
 
 	
 
 	public User() {
 		
+	}
+
+	
+	public User( String acc, String pwd, String cname, String login_date, String reg_date, String mail,
+			String role) {
+		
+		this.acc = acc;
+		this.pwd = pwd;
+		this.cname = cname;
+		this.login_date = login_date;
+		this.reg_date = reg_date;
+		this.mail = mail;
+		this.role = role;
 	}
 
 	public String getAcc() {

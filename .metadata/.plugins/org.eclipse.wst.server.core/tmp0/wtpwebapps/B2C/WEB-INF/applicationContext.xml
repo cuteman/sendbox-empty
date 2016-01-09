@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+ 	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xmlns:beans="http://cxf.apache.org/configuration/beans"
+    xmlns:cxf="http://cxf.apache.org/core"
+    
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security-4.2.xsd
+        http://cxf.apache.org/jaxws
+        http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/core
+		http://cxf.apache.org/schemas/core.xsd">
+    
+
+    
+    <!-- 設定JDBC連線讀取檔案   
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	-->  
+	<!-- 自動注入 -->
+	<context:component-scan base-package="cs">
+    	<context:exclude-filter type="regex" expression="cs.server.controller.*"/>
+	</context:component-scan>
+	
+	 
+	<!-- JNDI GAMEDB DataSource設定-->
+	<bean id = "B2CDataSource" class ="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/b2c"></property>
+	</bean>
+	<!-- Hibernate GAMEDB 映射設定-->
+	<bean id="b2cSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="B2CDataSource" />
+			<property name="packagesToScan">
+				<list>
+					<value>cs.server.model</value>
+				</list>
+			</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.autoReconnect">true</prop>
+				<prop key="hibernate.autoReconnectForPools">true</prop>
+			</props>
+		</property>
+	</bean>
+	  
+	
+<!-- Hibernate GAMEDB 事務管理  -->
+	<bean id="b2cHibernateTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="b2cSessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="b2cHibernateTransactionManager" />
+</beans>

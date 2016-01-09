@@ -27,9 +27,11 @@
   </build>
      <properties>
         <springframework.version>4.2.4.RELEASE</springframework.version>
-       <hibernate.version>4.3.6.Final</hibernate.version>
+       	<hibernate.version>4.3.6.Final</hibernate.version>
         <mysql.connector.version>5.1.31</mysql.connector.version>
         <jsonlib.version>2.4</jsonlib.version>
+        <javax.servlet-version>3.1.0</javax.servlet-version>
+        <jackson-version>2.3.0</jackson-version>
     </properties>
   
   
@@ -74,23 +76,32 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.connector.version}</version>
         </dependency>
-     
-
-     <dependency>
-	    <groupId>com.fasterxml.jackson.core</groupId>
-	    <artifactId>jackson-core</artifactId>
-	    <version>2.3.0</version>
-	</dependency>
-	<dependency>
-	    <groupId>com.fasterxml.jackson.core</groupId>
-	    <artifactId>jackson-databind</artifactId>
-	    <version>2.3.0</version>
-	</dependency>
+	     
+	
+	     <dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>${jackson-version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>${jackson-version}</version>
+		</dependency>
      
   	   <dependency>
 		   <groupId>log4j</groupId>
 		   <artifactId>log4j</artifactId>
 		   <version>1.2.14</version>
   		</dependency>
+  		
+  		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet-version}</version>
+		</dependency>
+  		
+  		
   </dependencies>
 </project>

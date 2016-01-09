@@ -1,54 +1,40 @@
 package cs.server.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cs.server.model.User;
-import cs.server.serveice.UserService;
-import cs.server.util.NewDate;
+import cs.server.handler.UserHandler;
 
 @Controller
-@RequestMapping(value = "user")
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	private UserHandler userHandler;
 
-	@Autowired
-	private NewDate newDate;
-
-	@RequestMapping(params = "login")
-	public ModelAndView login(String uid, String cname ,HttpSession session) {
-
-
-		System.out.println("loginMethod begin : "+ uid + "  " + cname);
+	@RequestMapping("/login")
+	public ModelAndView login (HttpServletRequest req, String acc, String pwd ) {
+		System.out.println("1");
 		ModelAndView modelView = new ModelAndView();
-		if (uid == null && cname == null) {
+		if (acc.isEmpty() || pwd.isEmpty())
+		{
+			System.out.println("2");
 			modelView.setViewName("error");
 			return modelView;
+			
+		}else
+		{
+			System.out.println("asas");
+			//userHandler.login(session, acc, pwd)
 		}
-
-		String nowdate = newDate.getDate();
-		User _user = userService.findUserByuserid(uid);
-		if (_user == null) {
-			_user = new User();
-			_user.setUserid(uid);
-			_user.setCname(cname);
-			_user.setReg_date(nowdate);
-			_user.setLogin_date(nowdate);
-			session.setAttribute("user", _user);
-
-		} else {
-			_user.setLogin_date(nowdate);
-		}
-		userService.updateUserData(_user);
-		modelView.setViewName("weight");
-		System.out.println("loginMethod over :"+ uid + ",came:" +cname);
+	//	modelView.setViewName("weight");
+		System.out.println("3");
 		return modelView;
 	}
 

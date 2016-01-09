@@ -16,37 +16,38 @@ public class UserDaoImpl implements UserDao{
 	
 	@Autowired
 	private SessionFactory b2cSessionFactory;
-	
-	
 
-
-
-	public User findUserByuserid(String userid) {
+	@Override
+	public User getUser(String acc, String pwd) {
 		// TODO Auto-generated method stub
-		
-		return (User)b2cSessionFactory.getCurrentSession().createSQLQuery("select * from user").addEntity(User.class).uniqueResult();
+		String sql = String.format("select * from user where acc = %s and pwd= %s", acc, pwd);
+		return (User)b2cSessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(User.class).uniqueResult();
 	}
 
-
+	@Override
 	public int updateUserData(User user) {
 		// TODO Auto-generated method stub
-		b2cSessionFactory.getCurrentSession().saveOrUpdate(user);
-		System.out.println("updateUserData : "+user.getId());
-		return 0;
+		int res = 0 ; 
+		try {
+			b2cSessionFactory.getCurrentSession().saveOrUpdate(user);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			res = 1; 
+		}
+		return res ;
 	}
 
-
-
-	public   boolean  isUserRegistered (String id){
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
+	@Override
 	public <T> List<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+
+
 
 
 

@@ -1,0 +1,41 @@
+package cs.server.handler;
+
+import org.springframework.stereotype.Component;
+
+@Component("UserHandler")
+public class UserHandler {
+	
+	
+	public int login(String acc , String pwd){
+		int res = 0 ;
+		
+		return res;
+	}
+
+	
+	public int modifyPWD(String acc){
+		
+		int res = 0 ;
+		
+		return res;
+		
+		
+	}
+	
+	public int register(String acc ,String  pwd){
+		
+		int res = 0 ;
+		
+		return res;
+	}
+
+	
+	public int  checkAcc(){
+		
+		
+		int res = 0 ;
+		
+		return res;
+		
+	}
+}

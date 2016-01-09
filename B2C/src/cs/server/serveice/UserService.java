@@ -6,12 +6,7 @@ import cs.server.model.User;
 
 public interface UserService {
 
-
-	
-
-	public User findUserByuserid(String userid);
-	
-	public boolean  isUserRegistered (String id);
+	public User getUser(String acc, String pwd);
 	
 	public int updateUserData (User user);
 	
