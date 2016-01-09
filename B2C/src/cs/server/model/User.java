@@ -15,14 +15,16 @@ public class User {
 	@Column(name = "id")
 	public String id ;
 	
-	@Column(name = "userid")
-	public String userid;
+	@Column(name = "acc")
+	public String acc;
+	
+
+	@Column(name = "pwd")
+	public String pwd;
 	
 	@Column(name = "cname")
 	public String cname;
 	
-	@Column(name = "weight")
-	public float weight;
 	
 	@Column(name = "login_date")
 	public String login_date;
@@ -45,13 +47,7 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
+	
 
 	public String getCname() {
 		return cname;
@@ -61,13 +57,7 @@ public class User {
 		this.cname = cname;
 	}
 
-	public float getWeight() {
-		return weight;
-	}
-
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
+	
 
 	public String getLogin_date() {
 		return login_date;
@@ -101,21 +91,26 @@ public class User {
 		this.origin = origin;
 	}
 
-	public User(String id, String userid, String cname, float weight,
-			String login_date, String reg_date, String mail, int origin) {
-		super();
-		this.id = id;
-		this.userid = userid;
-		this.cname = cname;
-		this.weight = weight;
-		this.login_date = login_date;
-		this.reg_date = reg_date;
-		this.mail = mail;
-		this.origin = origin;
-	}
+	
 
 	public User() {
 		
+	}
+
+	public String getAcc() {
+		return acc;
+	}
+
+	public void setAcc(String acc) {
+		this.acc = acc;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	
 	
