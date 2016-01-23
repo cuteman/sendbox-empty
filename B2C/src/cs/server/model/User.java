@@ -1,6 +1,7 @@
 package cs.server.model;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,8 +37,8 @@ public class User {
 	@Column(name = "mail")
 	public String mail;
 	
-	@Column(name = "role")
-	public String role;
+	@Column(name = "role_id" )
+	public String role_id;
 
 	public String getId() {
 		return id;
@@ -59,12 +60,13 @@ public class User {
 
 	
 
-	public String getRole() {
-		return role;
+	
+	public String getRole_id() {
+		return role_id;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRole_id(String role_id) {
+		this.role_id = role_id;
 	}
 
 	public String getLogin_date() {
@@ -100,16 +102,18 @@ public class User {
 	}
 
 	
-	public User( String acc, String pwd, String cname, String login_date, String reg_date, String mail,
-			String role) {
-		
+
+	public User(String id, String acc, String pwd, String cname, String login_date, String reg_date, String mail,
+			String role_id) {
+		super();
+		this.id = id;
 		this.acc = acc;
 		this.pwd = pwd;
 		this.cname = cname;
 		this.login_date = login_date;
 		this.reg_date = reg_date;
 		this.mail = mail;
-		this.role = role;
+		this.role_id = role_id;
 	}
 
 	public String getAcc() {

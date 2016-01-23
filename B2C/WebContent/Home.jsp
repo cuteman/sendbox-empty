@@ -51,7 +51,11 @@
 	    </div> 
 	</div>    
 	
-	
-	
+	<form action="<%=request.getContextPath()%>/login" method="post">
+		用户名:<input id = acc type="text" name="acc"/> <br/>
+		密码:<input id = pwd type="text" name="pwd"/><br/>
+		<input type="submit" value="登录" />
+	</form>
+	<p>${message}</p>
 </body>
 </html>

@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public User getUser(String acc, String pwd) {
 		// TODO Auto-generated method stub
-		String sql = String.format("select * from user where acc = %s and pwd= %s", acc, pwd);
+		String sql = String.format("select * from user where acc = '%s' and pwd= '%s'", acc, pwd);
 		return (User)b2cSessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(User.class).uniqueResult();
 	}
 
@@ -43,6 +43,13 @@ public class UserDaoImpl implements UserDao{
 	public <T> List<T> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public User getUser(String acc) {
+		// TODO Auto-generated method stub
+		String sql = String.format("select * from user where acc = '%s' ", acc);
+		return (User)b2cSessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(User.class).uniqueResult();
 	}
 	
 	

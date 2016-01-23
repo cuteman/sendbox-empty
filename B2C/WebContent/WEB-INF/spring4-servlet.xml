@@ -25,7 +25,7 @@
 	<!-- InternalResourceViewResolver默認的就是JstlView所以這裡就不用配置viewClass了 gevin: 
 		我想這邊的意思就是，透過controller 回傳的 jsp 頁面，都是在/WEB-INF/view/ 裡找，且自動加上 .jsp -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/view/"></property> 
+	<!--  <property name="prefix" value="/view/"></property> -->	
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 

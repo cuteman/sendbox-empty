@@ -2,28 +2,35 @@ package cs.server.handler;
 
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
 
-import cs.server.model.User;
-import cs.server.serveice.UserService;
+
 
 @Component("UserHandler")
 public class UserHandler {
 	
-	@Autowired
-	private UserService userService;
-	
-	public int login(String acc , String pwd){
-		int res = 0 ;
-		User user = userService.getUser(acc, pwd);
-		if(user == null)
-		{
-			res = 1; 
+
+	public String login(String acc , String pwd){
+		
+		Subject user = SecurityUtils.getSubject();
+		
+	    UsernamePasswordToken token = new UsernamePasswordToken(acc,pwd);
+	    token.setRememberMe(true);
+	    String  url  = "main";
+        try {
+        	  user.login(token);
+		} catch (AuthenticationException  e) {
+			// TODO: handle exception
+			url = "error";
+			token.clear(); 
+			e.printStackTrace();
 		}
-		
-		
-		return res;
+        
+		return url;
 	}
 
 	
